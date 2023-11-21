@@ -6,7 +6,7 @@ def get_data(data):
     """
     This function gets the data (returns 2 arrays, temperature and average resistance
     """
-    temperature = data[:, 5]  # CHANGE TO 6 IF NOT TAFTER BUT TBASE
+    temperature = data[:, 5] 
     resistance_pos = data[:, 2] / data[:, 1]
     resistance_neg = data[:, 4] / data[:, 3]
     average_resistance = (resistance_pos + resistance_neg) / 2
@@ -18,7 +18,7 @@ def datalimit(data,lowestTemp,highestTemp,number):
     number: string, number of the measurement
     data: data to input
     """
-    temperature = data[:, 5] #CHANGE TO 6 IF NOT TAFTER BUT TBASE
+    temperature = data[:, 5]
     resistance_pos = data[:, 2] / data[:, 1]
     resistance_neg = data[:, 4] / data[:, 3]
     average_resistance = (resistance_pos + resistance_neg) / 2
@@ -48,7 +48,7 @@ def plot(data, number,svalue = 0.8):
     for the resistance given by the measurement
     """
     #take data and make calculate average
-    temperature = data[:, 5]#CHANGE TO 6 IF NOT TAFTER BUT TBASE
+    temperature = data[:, 5]
     resistance_pos = data[:, 2] / data[:, 1]
     resistance_neg = data[:, 4] / data[:, 3]
     average_resistance = (resistance_pos + resistance_neg) / 2
@@ -72,7 +72,7 @@ def linearfit(data,lowestTemp,highestTemp,number,s=5,space=2,middlepoint = True)
     """
     This function linearly fits the transistion of the phaseshift and plots it
     """
-    temperature = data[:, 5]#CHANGE TO 6 IF NOT TAFTER BUT TBASE
+    temperature = data[:, 5]
     resistance_pos = data[:, 2] / data[:, 1]
     resistance_neg = data[:, 4] / data[:, 3]
     average_resistance = (resistance_pos + resistance_neg) / 2
@@ -94,12 +94,6 @@ def linearfit(data,lowestTemp,highestTemp,number,s=5,space=2,middlepoint = True)
             fit_resistance.append(average_resistance[i])
     #best fit line
     popt, pcov = opt.curve_fit(linear_function,fit_temperature,fit_resistance)
-
-    #Random stuff IGNORE
-    #temptemp = linear_function(293,*popt)
-    #print("Resistance at 293 K" + str(temptemp))
-    #print(str(popt)+str(number))
-
     #name and scatter plot
     filestring = "Linear fits/Linear_fit_measurement_" + number + ".png"  # name of the file and where it goes
     titlestring = "Linear fit measurement " + number
@@ -148,7 +142,7 @@ M_overnight = np.loadtxt("overnight measrement 30mA",skiprows=7)
 
 #Plotting of the data
 
-"""
+
 #We plot the file using a for loop and the function above
 for i,data in enumerate (data_array,1):
     numberstr = str(i)
@@ -156,11 +150,11 @@ for i,data in enumerate (data_array,1):
 
 plot(M_std,"STD",3)
 plot(M_overnight,"Overnight")
-"""
+
 #Limiting the data as needed
 
 
-"""
+
 #we now adjust the data to a better area for representation, this has to be done seperately for each value
 datalimit(M2,75,90,"2")
 datalimit(M3,130,140,"3")
@@ -170,7 +164,7 @@ datalimit(M5,98,102,"5")
 datalimit(M9,103,107,"9")
 datalimit(M12,80,85,"12")
 datalimit(M_overnight,80,120,"overnight")
-"""
+
 
 
 #The Linear fit
